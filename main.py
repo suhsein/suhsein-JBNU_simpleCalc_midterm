@@ -1,5 +1,21 @@
 # Program make a simple calculator
 
+#logging 설정
+import logging
+
+Log_Format = "%(levelname)s %(asctime)s     %(message)s"
+
+logging.basicConfig(filename = "logfile.log",
+                    filemode = "w",
+                    format = Log_Format, 
+                    level = logging.INFO)
+
+logger = logging.getLogger()
+
+# Program make a simple calculator
+
+op = ['','+', '-', '*', '/']
+
 # This function adds two numbers
 def add(x, y):
     return x + y
@@ -26,7 +42,7 @@ print("4.Divide")
 
 while True:
     # take input from the user
-    choice = input("Enter choice(1/2/3): ")
+    choice = input("Enter choice(1/2/3/4): ")
 
     # check if choice is one of the four options
     if choice in ('1', '2', '3', '4'):
@@ -34,17 +50,29 @@ while True:
         num2 = float(input("Enter second number: "))
 
         if choice == '1':
-            print(num1, "+", num2, "=", add(num1, num2))
+            # print(num1, "+", num2, "=", add(num1, num2))
+            str = "%d %s %d = %d" % (num1, op[1], num2, add(num1,num2))
+            print(str)
+            logging.info(str)
 
         elif choice == '2':
-            print(num1, "-", num2, "=", subtract(num1, num2))
+            str = "%d %s %d = %d" % (num1, op[2], num2, subtract(num1,num2))
+            print(str)
+            logging.info(str)
 
         elif choice == '3':
-            print(num1, "*", num2, "=", multiply(num1, num2))
-            
+            str = "%d %s %d = %d" % (num1, op[3], num2, multiply(num1,num2))
+            print(str)
+            logging.info(str)
+
         elif choice =='4':
-            print(num1, "/", num2, "=", divide(num1,num2))
-            
+            if(num2 == 0):
+              logging.warning("Division by Zero")
+            else:
+              str = "%d %s %d = %d" % (num1, op[4], num2, divide(num1,num2))
+              print(str)
+              logging.info(str)
+
 
         # check if user wants another calculation
         # break the while loop if answer is no
@@ -53,4 +81,6 @@ while True:
             break
 
     else:
+        logging.warning("Invalid Input")
         print("Invalid Input")
+        
