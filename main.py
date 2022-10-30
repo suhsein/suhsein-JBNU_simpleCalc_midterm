@@ -2,12 +2,9 @@
 import calculator as cc
 import logging_config as lg
 import term_loop as tl
+import initial
 
-print("Select operation.")
-print("1.Add")
-print("2.Subtract")
-print("3.Multiply")
-print("4.Divide")   
+initial.init()
 
 while True:
     # take input from the user
@@ -20,35 +17,31 @@ while True:
 
         if choice == '1':
             str = "%.1f + %.1f = %.1f" % (num1, num2, cc.add(num1,num2))
-            print(str)
-            lg.logging.info(str)
 
         elif choice == '2':
             str = "%.1f - %.1f = %.1f" % (num1, num2, cc.subtract(num1,num2))
-            print(str)
-            lg.logging.info(str)
 
         elif choice == '3':
             str = "%.1f * %.1f = %.1f" % (num1, num2, cc.multiply(num1,num2))
-            print(str)
-            lg.logging.info(str)
 
         elif choice =='4':
             if(num2 == 0):
               lg.logging.warning("Division by Zero")
               print("You can't divide by zero.")
+              continue
             else:
               str = "%.1f / %.1f = %.1f" % (num1, num2, cc.divide(num1,num2))
-              print(str)
-              lg.logging.info(str)
+      
+        print(str)
+        lg.logging.info(str)
 
         flag = False
         flag = tl.term(flag)
+        
         if flag == False:
           break
         else:
           continue
-
 
     else:
         lg.logging.warning("Invalid Input")
