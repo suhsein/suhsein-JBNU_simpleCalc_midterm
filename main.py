@@ -67,6 +67,7 @@ while True:
         elif choice =='4':
             if(num2 == 0):
               logging.warning("Division by Zero")
+              print("You can't divide by zero.")
             else:
               str = "%d / %d = %d" % (num1, num2, divide(num1,num2))
               print(str)
@@ -85,8 +86,17 @@ while True:
               flag = True
               break
           elif next_calculation == "no":
-              flag = False
-              break
+              confirm = input("Are you sure? (yes/no): ")
+              confirm = confirm.lower()
+              
+              if confirm == "yes":
+                break
+              elif confirm == "no":
+                continue
+              else:
+                print("Invalid Input. Please answer yes or no.")
+                #로깅?
+                continue
           else:
             print("Invalid Input. Please answer yes or no.")
             #로깅?
