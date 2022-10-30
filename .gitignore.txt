@@ -1,0 +1,3 @@
+logfile.log
+.vscode/
+__pycache__/
